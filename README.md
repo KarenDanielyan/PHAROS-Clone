@@ -138,7 +138,6 @@ This virtual clone is designed to be a drop-in replacement for testing applicati
 - **Development tool only**: Not intended for production use
 - **No persistence**: State resets on restart
 - **Single instance**: Designed for one virtual laser at a time
-- **Localhost only**: No remote access for security consistency with real lasers
 - **No real hardware control**: Pure simulation for development purposes
 
 ## 📚 API Reference
@@ -154,3 +153,4 @@ This project is designed as a development aid. Contributions should focus on:
 - Enhancing development experience
 
 ---
+
