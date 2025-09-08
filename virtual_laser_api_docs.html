@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHAROS Virtual Laser Clone - API Reference</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8IS0tIExhc2VyIGJlYW0gLS0+CiAgPGxpbmUgeDE9IjQiIHkxPSIxNiIgeDI9IjI4IiB5Mj0iMTYiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIExhc2VyIGJlYW0gZ2xvdyAtLT4KICA8bGluZSB4MT0iNCIgeTE9IjE2IiB4Mj0iMjgiIHkyPSIxNiIgc3Ryb2tlPSIjZWY0NDQ0IiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC43Ii8+CiAgPCEtLSBMYXNlciBzb3VyY2UgLS0+CiAgPHJlY3QgeD0iMiIgeT0iMTIiIHdpZHRoPSI2IiBoZWlnaHQ9IjgiIHJ4PSIxIiBmaWxsPSIjMWYyOTM3Ii8+CiAgPCEtLSBMYXNlciBhcGVydHVyZSAtLT4KICA8Y2lyY2xlIGN4PSI1IiBjeT0iMTYiIHI9IjEuNSIgZmlsbD0iIzNiODJmNiIvPgogIDwhLS0gVGFyZ2V0L3JlZmxlY3RvciAtLT4KICA8Y2lyY2xlIGN4PSIyNiIgY3k9IjE2IiByPSIzIiBmaWxsPSJub25lIiBzdHJva2U9IiMxZjI5MzciIHN0cm9rZS13aWR0aD0iMiIvPgogIDxjaXJjbGUgY3g9IjI2IiBjeT0iMTYiIHI9IjEiIGZpbGw9IiNlZjQ0NDQiLz4KICA8IS0tIEVuZXJneSBwdWxzZXMgLS0+CiAgPGNpcmNsZSBjeD0iMTAiIGN5PSIxNiIgcj0iMSIgZmlsbD0iIzEwYjk4MSIgb3BhY2l0eT0iMC44Ij4KICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImN4IiB2YWx1ZXM9IjEwOzI0OzEwIiBkdXI9IjJzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPgogIDwvY2lyY2xlPgogIDxjaXJjbGUgY3g9IjE0IiBjeT0iMTYiIHI9IjAuNSIgZmlsbD0iIzEwYjk4MSIgb3BhY2l0eT0iMC42Ij4KICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImN4IiB2YWx1ZXM9IjE0OzI0OzE0IiBkdXI9IjEuNXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+CiAgPC9jaXJjbGU+Cjwvc3ZnPgo=">
+    <style>
+        :root {
+            --primary-color: #1f2937;
+            --secondary-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: #ffffff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .server-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .nav {
+            background: var(--light-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .nav a:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .section h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+        }
+        
+        .endpoint {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .endpoint-header {
+            padding: 1rem;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .method {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .method.get { background: var(--success-color); color: white; }
+        .method.post { background: var(--secondary-color); color: white; }
+        .method.put { background: var(--warning-color); color: white; }
+        .method.delete { background: var(--danger-color); color: white; }
+        
+        .endpoint-path {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .endpoint-description {
+            color: var(--text-secondary);
+            margin-left: auto;
+        }
+        
+        .endpoint-body {
+            padding: 1rem;
+        }
+        
+        .response-example {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        
+        .parameter {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+        }
+        
+        .parameter-name {
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+        
+        .parameter-type {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        
+        .state-diagram {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .state-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .state {
+            background: var(--light-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+        
+        .arrow {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #dbeafe;
+            border: 1px solid #93c5fd;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .warning-box {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .error-box {
+            background: #fee2e2;
+            border: 1px solid #fca5a5;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .endpoint-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .state-flow {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔬 PHAROS Virtual Laser Clone</h1>
+            <p class="subtitle">REST API Reference for Development</p>
+            <div class="server-info">
+                <strong>Base URL:</strong> http://localhost:20020/v1<br>
+                <strong>Version:</strong> 1.0.0<br>
+                <strong>Environment:</strong> Development Virtual Clone
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#basic-api">Basic API</a></li>
+                <li><a href="#advanced-api">Advanced API</a></li>
+                <li><a href="#raw-api">Raw API</a></li>
+                <li><a href="#states">State Machine</a></li>
+                <li><a href="#examples">Examples</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- Overview Section -->
+            <section id="overview" class="section">
+                <h2>📖 Overview</h2>
+                <p>The PHAROS Virtual Laser Clone provides a complete simulation of the PHAROS laser REST API for development purposes. This virtual clone implements all endpoints with identical behavior to the original hardware API.</p>
+                
+                <div class="info-box">
+                    <strong>🎯 Purpose:</strong> This virtual clone is designed for developing and testing laser automation applications without requiring physical hardware access.
+                </div>
+
+                <h3>API Structure</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>🔧 Basic API (/v1/Basic)</h4>
+                        <p>Essential laser operations including power control, state management, and output control. Maps 1:1 with the UI title screen.</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚙️ Advanced API (/v1/Advanced)</h4>
+                        <p>Complex functionality including detailed state information, hardware configuration, and advanced preset management.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔬 Raw API (/v1/Raw)</h4>
+                        <p>Low-level functionality for advanced users only, including direct wrapper function execution.</p>
+                    </div>
+                </div>
+
+                <h3>Authentication & Security</h3>
+                <div class="warning-box">
+                    <strong>⚠️ Security Note:</strong> Like the real PHAROS laser, this API operates on localhost only and requires no authentication.
+                </div>
+            </section>
+
+            <!-- State Machine Section -->
+            <section id="states" class="section">
+                <h2>🔄 Laser State Machine</h2>
+                <p>The virtual laser maintains a realistic state machine that mirrors the behavior of the physical PHAROS laser system.</p>
+                
+                <div class="state-diagram">
+                    <h3>State Transition Flow</h3>
+                    <div class="state-flow">
+                        <div class="state">StateDisconnected</div>
+                        <div class="arrow">→</div>
+                        <div class="state">StateOff</div>
+                        <div class="arrow">→</div>
+                        <div class="state">StateOperational</div>
+                        <div class="arrow">→</div>
+                        <div class="state">StateEmissionOn</div>
+                    </div>
+                </div>
+
+                <h3>Available States</h3>
+                <ul>
+                    <li><strong>StateDisconnected:</strong> Laser is not connected or available</li>
+                    <li><strong>StateOff:</strong> Laser is connected but turned off</li>
+                    <li><strong>StateStandingBy:</strong> Laser is in standby mode</li>
+                    <li><strong>StateOperational:</strong> Laser is ready for operation</li>
+                    <li><strong>StateEmissionOn:</strong> Laser output is enabled and active</li>
+                    <li><strong>StateFailure:</strong> Laser has encountered an error</li>
+                    <li><strong>StateShuttingDown:</strong> Laser is in shutdown process</li>
+                </ul>
+            </section>
+
+            <!-- Basic API Section -->
+            <section id="basic-api" class="section">
+                <h2>🔧 Basic API Endpoints</h2>
+                
+                <!-- Get All Basic Properties -->
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/v1/Basic</span>
+                        <span class="endpoint-description">Get all basic properties in batch</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Returns all basic laser properties that have GET methods in a single response. Convenient for getting complete laser status.</p>
+                        <div class="response-example">{
+  "ActualAttenuatorPercentage": 50.1,
+  "ActualHarmonic": 1,
+  "ActualOutputEnergy": 50.0,
+  "ActualOutputFrequency": 100.1,
+  "ActualOutputPower": 2.501,
+  "ActualPpDivider": 1,
+  "ActualRaFrequency": 100.1,
+  "ActualRaPower": 5.0,
+  "ActualStateName": "StateOperational",
+  "GeneralStatus": "Operational",
+  "IsOutputEnabled": false,
+  "SelectedPresetIndex": 1,
+  "TargetAttenuatorPercentage": 50.0,
+  "TargetPpDivider": 1
+}</div>
+                    </div>
+                </div>
+
+                <!-- Individual GET Endpoints -->
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/v1/Basic/ActualOutputPower</span>
+                        <span class="endpoint-description">Get current laser output power</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Returns the actual laser output power in watts, taking PP divider and attenuator into account.</p>
+                        <div class="response-example">"2.501"</div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/v1/Basic/ActualStateName</span>
+                        <span class="endpoint-description">Get current laser state</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Returns the name of the current internal state machine state.</p>
+                        <div class="response-example">"StateOperational"</div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/v1/Basic/IsOutputEnabled</span>
+                        <span class="endpoint-description">Check if laser output is enabled</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Returns whether the laser output is currently enabled.</p>
+                        <div class="response-example">false</div>
+                    </div>
+                </div>
+
+                <!-- POST Actions -->
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/v1/Basic/TurnOn</span>
+                        <span class="endpoint-description">Turn on the laser</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Transitions the laser from Off or Disconnected state to Operational state.</p>
+                        <div class="warning-box">
+                            <strong>⚠️ State Requirement:</strong> Can only be called when laser is in StateOff or StateDisconnected.
+                        </div>
+                        <div class="response-example">{
+  "status": "success",
+  "message": "Laser turned on successfully"
+}</div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/v1/Basic/EnableOutput</span>
+                        <span class="endpoint-description">Enable laser output</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Enables laser output and transitions to StateEmissionOn.</p>
+                        <div class="warning-box">
+                            <strong>⚠️ State Requirement:</strong> Can only be called when laser is in StateOperational.
+                        </div>
+                        <div class="response-example">{
+  "status": "success",
+  "message": "Output enabled successfully"
+}</div>
+                    </div>
+                </div>
+
+                <!-- PUT Parameters -->
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method put">PUT</span>
+                        <span class="endpoint-path">/v1/Basic/TargetAttenuatorPercentage</span>
+                        <span class="endpoint-description">Set attenuator percentage</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Sets the target attenuator percentage (0-100%).</p>
+                        <div class="parameter">
+                            <span class="parameter-name">Body:</span> <span class="parameter-type">number (0-100)</span><br>
+                            Example: <code>"75.5"</code>
+                        </div>
+                        <div class="response-example">{
+  "status": "success",
+  "message": "Attenuator percentage set to 75.5%"
+}</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced API Section -->
+            <section id="advanced-api" class="section">
+                <h2>⚙️ Advanced API Endpoints</h2>
+                
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/v1/Advanced</span>
+                        <span class="endpoint-description">Get all advanced properties</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Returns all advanced laser properties including state ID, presets, and hardware configuration.</p>
+                        <div class="response-example">{
+  "ActualStateId": 128,
+  "IsPpOpened": false,
+  "IsShutterUsedToControlOutput": true,
+  "IsRemoteInterlockActive": false,
+  "Presets": [
+    {
+      "AttenuatorPercentage": 50.0,
+      "BurstMode": 0,
+      "HarmonicNumber": 1,
+      "Notes": "Default preset 1",
+      "PpDivider": 1,
+      "PulseRepetitionRateInKhz": 100.0,
+      "RaOutputPowerSetpointInW": 5.0
+    }
+  ]
+}</div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/v1/Advanced/ActualStateId</span>
+                        <span class="endpoint-description">Get numerical state ID</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Returns the numerical representation of the current laser state.</p>
+                        <div class="info-box">
+                            <strong>State ID Mapping:</strong><br>
+                            • StateOperational = 0x80 (128)<br>
+                            • StateOff = 0x200 (512)<br>
+                            • StateDisconnected = 0x800 (2048)
+                        </div>
+                        <div class="response-example">"128"</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Raw API Section -->
+            <section id="raw-api" class="section">
+                <h2>🔬 Raw API Endpoints</h2>
+                
+                <div class="error-box">
+                    <strong>⚠️ Advanced Users Only:</strong> Raw API endpoints provide low-level access and should be used with caution.
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/v1/Raw/ExecuteWrapperFunction</span>
+                        <span class="endpoint-description">Execute low-level wrapper function</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <p>Simulates execution of low-level wrapper functions for advanced hardware control.</p>
+                        <div class="parameter">
+                            <span class="parameter-name">Body:</span> <span class="parameter-type">string</span><br>
+                            Function name and parameters
+                        </div>
+                        <div class="response-example">{
+  "status": "executed",
+  "function": "TestFunction(param1, param2)",
+  "result": "simulated_success",
+  "timestamp": "2025-09-06T10:30:00.000Z",
+  "warning": "This is a simulated execution for development purposes"
+}</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Examples Section -->
+            <section id="examples" class="section">
+                <h2>💡 Usage Examples</h2>
+                
+                <h3>Basic Laser Operation Workflow</h3>
+                <div class="response-example"># 1. Turn on the laser
+curl -X POST http://localhost:20020/v1/Basic/TurnOn
+
+# 2. Set attenuator to 75%
+curl -X PUT http://localhost:20020/v1/Basic/TargetAttenuatorPercentage \
+  -H "Content-Type: application/json" \
+  -d "75.0"
+
+# 3. Enable output
+curl -X POST http://localhost:20020/v1/Basic/EnableOutput
+
+# 4. Check current power
+curl http://localhost:20020/v1/Basic/ActualOutputPower
+
+# 5. Disable output
+curl -X POST http://localhost:20020/v1/Basic/CloseOutput
+
+# 6. Turn off laser
+curl -X POST http://localhost:20020/v1/Basic/TurnOff</div>
+
+                <h3>PowerShell Examples (Windows)</h3>
+                <div class="response-example"># Get laser status
+Invoke-RestMethod -Uri "http://localhost:20020/v1/Basic" -Method Get
+
+# Set attenuator percentage
+Invoke-RestMethod -Uri "http://localhost:20020/v1/Basic/TargetAttenuatorPercentage" `
+  -Method Put -Body "50.0" -ContentType "application/json"
+
+# Turn on laser
+Invoke-RestMethod -Uri "http://localhost:20020/v1/Basic/TurnOn" -Method Post</div>
+
+                <h3>Python Example</h3>
+                <div class="response-example">import requests
+
+# Base URL for the virtual laser
+base_url = "http://localhost:20020/v1"
+
+# Get all basic properties
+response = requests.get(f"{base_url}/Basic")
+laser_status = response.json()
+print(f"Laser state: {laser_status['ActualStateName']}")
+
+# Set attenuator percentage
+requests.put(f"{base_url}/Basic/TargetAttenuatorPercentage", data="75.0")
+
+# Enable output if laser is operational
+if laser_status['ActualStateName'] == 'StateOperational':
+    requests.post(f"{base_url}/Basic/EnableOutput")
+    print("Laser output enabled")</div>
+            </section>
+
+            <!-- Error Handling -->
+            <section class="section">
+                <h2>❌ Error Handling</h2>
+                <p>The API returns appropriate HTTP status codes and error messages for invalid operations.</p>
+                
+                <div class="info-box">
+                    <strong>Error Code Guidelines:</strong>
+                    <ul>
+                        <li><strong>400 Bad Request:</strong> Invalid parameter values, malformed requests, or validation errors</li>
+                        <li><strong>403 Forbidden:</strong> Operation is forbidden due to current laser state (e.g., cannot enable output when laser is off)</li>
+                        <li><strong>404 Not Found:</strong> Endpoint does not exist</li>
+                    </ul>
+                </div>
+                
+                <h3>Common Error Responses</h3>
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get" style="background: var(--danger-color);">400</span>
+                        <span class="endpoint-path">Bad Request</span>
+                        <span class="endpoint-description">Invalid parameter format or value</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <div class="response-example">{
+  "error": {
+    "code": 400,
+    "message": "Attenuator percentage must be between 0 and 100",
+    "timestamp": "2025-09-06T10:30:00.000Z"
+  }
+}</div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get" style="background: var(--danger-color);">403</span>
+                        <span class="endpoint-path">Forbidden</span>
+                        <span class="endpoint-description">Operation forbidden in current laser state</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <div class="response-example">{
+  "error": {
+    "code": 403,
+    "message": "Cannot enable output in state StateStandingBy",
+    "timestamp": "2025-09-06T10:30:00.000Z"
+  }
+}</div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-header">
+                        <span class="method get" style="background: var(--danger-color);">404</span>
+                        <span class="endpoint-path">Not Found</span>
+                        <span class="endpoint-description">Endpoint does not exist</span>
+                    </div>
+                    <div class="endpoint-body">
+                        <div class="response-example">{
+  "detail": "Not Found"
+}</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>PHAROS Virtual Laser Clone</strong> - Development Tool v1.0.0</p>
+            <p>This virtual clone simulates the PHAROS laser API for development purposes only.</p>
+            <p>🚀 Built with FastAPI | 📚 Auto-generated API documentation available at <code>/docs</code></p>
+        </div>
+    </footer>
+</body>
+</html>
